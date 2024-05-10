@@ -28,8 +28,8 @@ bool xflag=false;
 
 
 
-void DrawCubeTexture(Texture2D texture, Vector3 position, float width, float height, float length, Color color); // Draw cube textured
-void DrawCubeTextureRec(Texture2D texture, Rectangle source, Vector3 position, float width, float height, float length, Color color); // Draw cube with a region of a texture
+//void DrawCubeTexture(Texture2D texture, Vector3 position, float width, float height, float length, Color color); // Draw cube textured
+//void DrawCubeTextureRec(Texture2D texture, Rectangle source, Vector3 position, float width, float height, float length, Color color); // Draw cube with a region of a texture
 
 void updateController()
 {
@@ -105,7 +105,7 @@ int main(void)
 
             BeginMode3D(camera);
 
-				DrawModel(model, position, 2.0f, WHITE);
+				//DrawModel(model, position, 2.0f, WHITE);
 
                 // Draw cube with an applied texture
                 //DrawCubeTexture(texture, (Vector3){ -0.0f, 0.0f, 0.0f }, 2.0f, 4.0f, 2.0f, WHITE);
