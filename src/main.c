@@ -53,7 +53,7 @@ Rectangle dst={0.0f,0.0f,32.0f,32.0f};
 Player player_one = { 
 	.position = { 0 },
 	.direction = { 1, 0, 0 },
-	.speed = 0
+	.speed = 1.0f/60.0f
 };
 
 //------------------------------------------------------------------------------------
@@ -98,6 +98,8 @@ int main(void)
         //-----------------------------------------------------
         updateController();
 
+		movePlayer(&player_one);
+
         // Update
         //----------------------------------------------------------------------------------
         //UpdateCamera(&camera, CAMERA_ORBITAL);
@@ -107,15 +109,13 @@ int main(void)
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
-            ClearBackground(BLACK);
+            ClearBackground(DARKGRAY);
 
             BeginMode3D(camera);
 
 			drawPlayer(&player_one);
 
-				//DrawModel(model, position, 2.0f, WHITE);
-
-                // Draw cube with an applied texture
+			// Draw cube with an applied texture
 			//test();
 			// Draw cube with an applied texture, but only a defined rectangle piece of the texture
 			//DrawCubeTextureRec(texture, (Rectangle){ 0, texture.height/2, texture.width/2, texture.height/2 }, 

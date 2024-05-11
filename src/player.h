@@ -12,3 +12,6 @@ Player;
 
 void
 drawPlayer(Player *player);
+
+void
+movePlayer(Player *player);
