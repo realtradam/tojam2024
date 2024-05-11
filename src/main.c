@@ -56,6 +56,8 @@ Player player_one = {
 	.speed = 1.0f/60.0f
 };
 
+struct controller_data controllers;
+
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
@@ -77,7 +79,7 @@ int main(void)
     camera.fovy = 45.0f;
     camera.projection = CAMERA_PERSPECTIVE;
 
-
+	controller_init();
 
     Texture2D texture = LoadTexture("rom:/cubicmap_atlas32x32.png");    // Load map texture
 	//Model model = LoadModel("rom:/plane.m3d");
@@ -97,6 +99,7 @@ int main(void)
         // Update
         //-----------------------------------------------------
         updateController();
+		controller_read(&controllers);
 
 		movePlayer(&player_one);
 
