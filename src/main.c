@@ -24,12 +24,13 @@
 bool flag=true;
 bool xflag=false;
 
+#include "second.h"
+#include "player.h"
 
+Camera camera = { 0 };
 
-
-
-//void DrawCubeTexture(Texture2D texture, Vector3 position, float width, float height, float length, Color color); // Draw cube textured
-//void DrawCubeTextureRec(Texture2D texture, Rectangle source, Vector3 position, float width, float height, float length, Color color); // Draw cube with a region of a texture
+void DrawCubeTexture(Texture2D texture, Vector3 position, float width, float height, float length, Color color); // Draw cube textured
+void DrawCubeTextureRec(Texture2D texture, Rectangle source, Vector3 position, float width, float height, float length, Color color); // Draw cube with a region of a texture
 
 void updateController()
 {
@@ -49,6 +50,12 @@ extern Texture2D getFontGLTextureId(char *text);
 Rectangle src={0.0f,0.0f,5.0f,10.0f};
 Rectangle dst={0.0f,0.0f,32.0f,32.0f};
 
+Player player_one = { 
+	.position = { 0 },
+	.direction = { 1, 0, 0 },
+	.speed = 0
+};
+
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
@@ -64,7 +71,6 @@ int main(void)
     
 
      // Define the camera to look into our 3d world
-    Camera camera = { 0 };
     camera.position = (Vector3){ 0.0f, 10.0f, 10.0f };
     camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
     camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
@@ -105,19 +111,20 @@ int main(void)
 
             BeginMode3D(camera);
 
+			drawPlayer(&player_one);
+
 				//DrawModel(model, position, 2.0f, WHITE);
 
                 // Draw cube with an applied texture
-                //DrawCubeTexture(texture, (Vector3){ -0.0f, 0.0f, 0.0f }, 2.0f, 4.0f, 2.0f, WHITE);
+			//test();
+			// Draw cube with an applied texture, but only a defined rectangle piece of the texture
+			//DrawCubeTextureRec(texture, (Rectangle){ 0, texture.height/2, texture.width/2, texture.height/2 }, 
+			//    (Vector3){ 2.0f, 1.0f, 0.0f }, 2.0f, 2.0f, 2.0f, WHITE);
 
-                // Draw cube with an applied texture, but only a defined rectangle piece of the texture
-                //DrawCubeTextureRec(texture, (Rectangle){ 0, texture.height/2, texture.width/2, texture.height/2 }, 
-                //    (Vector3){ 2.0f, 1.0f, 0.0f }, 2.0f, 2.0f, 2.0f, WHITE);
+			DrawGrid(10, 1.0f);        // Draw a grid
 
-                DrawGrid(10, 1.0f);        // Draw a grid
-										   
 
-            EndMode3D();
+			EndMode3D();
 
             DrawFPS(10, 10);
 

@@ -1,7 +1,13 @@
 BUILD_DIR=build
+SRC_DIRS := ./src
 include $(N64_INST)/include/n64.mk
 
-src = main.c
+//src = src/main.c
+src := $(shell find $(SRC_DIRS) -name '*.cpp' -or -name '*.c' -or -name '*.s')
+OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+DEPS := $(OBJS:.o=.d)
+INC_DIRS := $(shell find $(SRC_DIRS) -type d)
+N64_INCLUDEDIR := $(addprefix -I,$(INC_DIRS))
 assets_png = $(wildcard assets/*.png)
 #assets_m3d = $(wildcard assets/*.m3d)
 
