@@ -150,7 +150,7 @@ renderWorld(World* world, Camera camera)
 
 	rlPushMatrix();
 	rlTranslatef(0,0,-space);
-	drawGrid((Vector3){0}, 5, 1, BLACK);
+	drawGrid((Vector3){0}, 5, 1, RAYWHITE);
 	rlPopMatrix();
 
 	rlPushMatrix();

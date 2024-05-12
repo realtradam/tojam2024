@@ -12,6 +12,8 @@ struct
 }
 Bullet;
 
+float bullet_speed = 0.5;
+
 Bullet bullets[100];
 
 	void
@@ -69,9 +71,9 @@ bullet_collision_check(void)
 		{
 			bullets[i].team = 0;
 		}
-		bullets[i].position.x += bullets[i].direction.x * 0.25;
-		bullets[i].position.y += bullets[i].direction.y * 0.25;
-		bullets[i].position.z += bullets[i].direction.z * 0.25;
+		bullets[i].position.x += bullets[i].direction.x * bullet_speed;
+		bullets[i].position.y += bullets[i].direction.y * bullet_speed;
+		bullets[i].position.z += bullets[i].direction.z * bullet_speed;
 		Vector3 enemypos = { 0 };
 		if (bullets[i].team == 1)
 		{

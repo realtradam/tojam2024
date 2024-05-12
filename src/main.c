@@ -58,7 +58,7 @@ World world = {
 		{ 
 			.position = { 0 },
 			.direction = { 1, 0, 0 },
-			.speed = 1.0f/30.0f,
+			.speed = 1.0f/25.0f,
 			.color = DARKBLUE,
 			.camera_mode = 1,
 		},
@@ -167,7 +167,7 @@ int main(void)
 		//----------------------------------------------------------------------------------
 		BeginDrawing();
 
-		ClearBackground(DARKGRAY);
+		ClearBackground(BLACK);
 
 		BeginScissorMode(0, 0, 320/2, 240);
 		rlViewport(0, 0, 320/2, 240);
@@ -179,7 +179,7 @@ int main(void)
 		EndScissorMode();
 		rlViewport(0, 0, 320, 240);
 
-		DrawRectangle((320/2)-4, 0, 2, 240, BLACK); // split screen line
+		DrawRectangle((320/2)-4, 0, 2, 240, DARKGRAY); // split screen line
 
 		// Draw cube with an applied texture
 		//test();
