@@ -117,7 +117,7 @@ int main(void)
 		//controller_read(&controllers);
 
 		movePlayers();
-		camera = lookThroughPlayer(camera, world.players[0], world.players[1]);
+		camera = lookThroughPlayer(camera, world.players[0]);
 
 		// Update
 		//----------------------------------------------------------------------------------

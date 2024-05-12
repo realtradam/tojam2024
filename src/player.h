@@ -15,7 +15,7 @@ struct
 Player;
 
 Camera
-lookThroughPlayer(Camera camera, Player player, Player player2);
+lookThroughPlayer(Camera camera, Player player);
 
 void
 drawPlayer(Player *player);

@@ -11,12 +11,12 @@ drawPlayer(Player *player)
 }
 
 Camera
-lookThroughPlayer(Camera camera, Player player, Player player2)
+lookThroughPlayer(Camera camera, Player player)
 {
 	//camera.position = player.position;
 	camera.position.x = player.position.x - (player.direction.x * 2);
 	camera.position.y = player.position.y - (player.direction.y * 2);
-	camera.position.z = player.position.z - (player.direction.z * 2);
+	camera.position.z = player.position.z - (player.direction.z * 2) + 1;
 	camera.target.x = player.position.x;
 	camera.target.y = player.position.y;
 	camera.target.z = player.position.z;
