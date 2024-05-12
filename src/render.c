@@ -64,8 +64,10 @@ drawLine(Vector3 start, Vector3 end, float width, int up, Color color)
 void
 drawGrid(Vector3 position, int lines, int size, Color color)
 {
-	position.x -= lines * size / 2;
-	position.y -= lines * size / 2;
+	position.x += lines * size / 2;
+	position.y -= (lines * size / 2);
+	rlPushMatrix();
+	//rlTranslatef(-(lines * size / 2), -(lines * size / 2), 0);
 	for(int i = 0; i < lines + 1; ++i)
 	{
 		float mx = position.x;
@@ -84,7 +86,7 @@ drawGrid(Vector3 position, int lines, int size, Color color)
 				},
 				4.0f,
 				2,
-				BLACK);
+				color);
 	}
 	for(int i = 0; i < lines + 1; ++i)
 	{
@@ -104,8 +106,9 @@ drawGrid(Vector3 position, int lines, int size, Color color)
 				},
 				4.0f,
 				-1,
-				BLACK);
+				color);
 	}
+	rlPopMatrix();
 }
 
 void
@@ -129,8 +132,8 @@ renderWorld(World* world, Camera camera)
 	//drawGrid((Vector3){0}, 10, 1);
 
 	for(int i = -3; i <= 3; ++i){
-		DrawCube((Vector3){i,3,3}, 0.5f, 0.5f, 0.5f, YELLOW);
-		DrawCube((Vector3){i,4,3}, 0.5f, 0.5f, 0.5f, DARKPURPLE);
+		//DrawCube((Vector3){i,3,3}, 0.5f, 0.5f, 0.5f, YELLOW);
+		//DrawCube((Vector3){i,4,3}, 0.5f, 0.5f, 0.5f, DARKPURPLE);
 		//DrawCube((Vector3){i,5,3}, 0.5f, 0.5f, 0.5f, YELLOW);
 		//DrawCube((Vector3){i,3,4}, 0.5f, 0.5f, 0.5f, MAGENTA);
 		//DrawCube((Vector3){i,4,4}, 0.5f, 0.5f, 0.5f, GREEN);
@@ -140,7 +143,32 @@ renderWorld(World* world, Camera camera)
 	}
 	//drawLine((Vector3){0}, (Vector3){10,0,0}, 2.0f, 2, BLACK);
 
-	drawGrid((Vector3){0}, 10, 1, BLACK);
+	int space = 3;
+
+	rlPushMatrix();
+	rlTranslatef(0,0,-space);
+	drawGrid((Vector3){0}, 5, 1, BLACK);
+	rlPopMatrix();
+
+	rlPushMatrix();
+	rlTranslatef(0,0,space);
+	rlRotatef(180,0,1,0);
+	drawGrid((Vector3){0}, 5, 1, GREEN);
+	rlPopMatrix();
+
+	rlPushMatrix();
+	rlTranslatef(0,space,0);
+	rlRotatef(90,1,0,0);
+	drawGrid((Vector3){0}, 5, 1, YELLOW);
+	rlPopMatrix();
+
+	rlPushMatrix();
+	rlRotatef(90,-1,0,0);
+	rlTranslatef(0,0,-space);
+	drawGrid((Vector3){0}, 5, 1, ORANGE);
+	rlPopMatrix();
+
+
 
 	//rlPopMatrix();
 	EndMode3D();

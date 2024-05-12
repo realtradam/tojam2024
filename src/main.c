@@ -116,7 +116,6 @@ int main(void)
 		//-----------------------------------------------------
 		//controller_read(&controllers);
 
-		movePlayers();
 		camera = lookThroughPlayer(camera, world.players[0]);
 
 		// Update
@@ -148,13 +147,14 @@ int main(void)
 		//DrawCubeTextureRec(texture, (Rectangle){ 0, texture.height/2, texture.width/2, texture.height/2 }, 
 		//    (Vector3){ 2.0f, 1.0f, 0.0f }, 2.0f, 2.0f, 2.0f, WHITE);
 		
+		movePlayers();
 		updateController();
 
 		char text[50];
 		sprintf(text, "Joystick %d,%d", inputs_p1.stick_x, inputs_p1.stick_y); 
 		DrawText(text, 10, 30, 12, GREEN);
+		/*
 		DrawText("Position", 150, 30, 12, GREEN);
-		sprintf(text, "x: %f", camera.position.x); 
 		DrawText(text, 150, 45, 12, GREEN);
 		sprintf(text, "y: %f", camera.position.y); 
 		DrawText(text, 150, 60, 12, GREEN);
@@ -167,6 +167,7 @@ int main(void)
 		DrawText(text, 220, 60, 12, GREEN);
 		sprintf(text, "%f", camera.target.z); 
 		DrawText(text, 220, 75, 12, GREEN);
+		*/
 		DrawFPS(10, 10);
 
 		EndDrawing();
