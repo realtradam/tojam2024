@@ -14,10 +14,13 @@ struct
 }
 Player;
 
+Camera
+lookThroughPlayer(Camera camera, Player player, Player player2);
+
 void
 drawPlayer(Player *player);
 
 void
-movePlayer(Player *player);
+movePlayers(void);
 
 #endif

@@ -4,12 +4,19 @@ joypad_buttons_t pressed_p1;
 joypad_buttons_t held_p1;
 joypad_inputs_t inputs_p1;
 
+joypad_buttons_t pressed_p2;
+joypad_buttons_t held_p2;
+joypad_inputs_t inputs_p2;
+
 void updateController()
 {
     joypad_poll();
     pressed_p1 = joypad_get_buttons_pressed(JOYPAD_PORT_1);
     held_p1 = joypad_get_buttons_held(JOYPAD_PORT_1);
     inputs_p1 = joypad_get_inputs(JOYPAD_PORT_1);
+    pressed_p2 = joypad_get_buttons_pressed(JOYPAD_PORT_2);
+    held_p2 = joypad_get_buttons_held(JOYPAD_PORT_2);
+    inputs_p2 = joypad_get_inputs(JOYPAD_PORT_2);
 
 
 	float x = inputs_p1.stick_x;
@@ -82,4 +89,53 @@ void updateController()
 	inputs_p1.stick_x = x / 55.0f * 127.0f;
 	inputs_p1.stick_y = y / 55.0f * 127.0f;
 
+	x = inputs_p2.stick_x;
+	y = inputs_p2.stick_y;
+
+	if(x > 60)
+	{
+		x = 60.0f;
+	}
+	else if(x < -60)
+	{
+		x = -60.0f;
+	}
+	else if((x > -5) && (x < 5))
+	{
+		x = 0.0f;
+	}
+
+	if(y > 60)
+	{
+		y = 60;
+	}
+	else if(y < -60)
+	{
+		y = -60;
+	}
+	else if((y > -5) && (y < 5))
+	{
+		y = 0;
+	}
+
+	if(x > 0)
+	{
+		x -= 5;
+	}
+	else if(x < 0)
+	{
+		x += 5;
+	}
+
+	if(y > 0)
+	{
+		y -= 5;
+	}
+	else if(y < 0)
+	{
+		y += 5;
+	}
+
+	inputs_p2.stick_x = x / 55.0f * 127.0f;
+	inputs_p2.stick_y = y / 55.0f * 127.0f;
 }

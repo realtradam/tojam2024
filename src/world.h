@@ -10,4 +10,6 @@ struct
 }
 World;
 
+extern World world;
+
 #endif

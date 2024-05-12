@@ -101,7 +101,6 @@ int main(void)
 	Texture2D texture = LoadTexture("rom:/cubicmap_atlas32x32.png");    // Load map texture
 																			   //Model model = LoadModel("rom:/plane.m3d");
 
-	Vector3 position = { 0.0f, 0.0f, 0.0f };                    // Set model position
 
 	//BoundingBox bounds = GetMeshBoundingBox(model.meshes[0]);   // Set model bounds
 
@@ -117,7 +116,8 @@ int main(void)
 		//-----------------------------------------------------
 		//controller_read(&controllers);
 
-		movePlayer(&(world.players[0]));
+		movePlayers();
+		//camera = lookThroughPlayer(camera, world.players[0], world.players[1]);
 
 		// Update
 		//----------------------------------------------------------------------------------
