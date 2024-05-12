@@ -75,11 +75,11 @@ bullet_collision_check(void)
 		Vector3 enemypos;
 		if (bullets[i].team == 1)
 		{
-			enemypos = world.players[0].position;
+			enemypos = world.players[1].position;
 		}
 		else if (bullets[i].team == 2)
 		{
-			enemypos = world.players[1].position;
+			enemypos = world.players[0].position;
 		}
 		if (bullets[i].team != 0) {
 			if (Vector3Distance(bullets[i].position, enemypos))
