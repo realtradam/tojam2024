@@ -72,7 +72,7 @@ bullet_collision_check(void)
 		bullets[i].position.x += bullets[i].direction.x * 0.25;
 		bullets[i].position.y += bullets[i].direction.y * 0.25;
 		bullets[i].position.z += bullets[i].direction.z * 0.25;
-		Vector3 enemypos = world.players[bullets[i].team-1].position;
+		Vector3 enemypos = world.players[!bullets[i].team-1].position;
 		if (Vector3Distance(world.players[0].position, enemypos))
 		{
 			world.players[bullets[i].team-1].points++;
