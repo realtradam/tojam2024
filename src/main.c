@@ -189,8 +189,12 @@ int main(void)
 		
 
 		char text[50];
-		sprintf(text, "Joystick %d,%d", inputs_p1.stick_x, inputs_p1.stick_y); 
-		DrawText(text, 10, 30, 12, GREEN);
+		//sprintf(text, "Joystick %d,%d", inputs_p1.stick_x, inputs_p1.stick_y); 
+		//DrawText(text, 10, 30, 12, GREEN);
+		sprintf(text, "Player1: %d", world.players[0].points); 
+		DrawText(text, 50, 30, 12, BLUE);
+		sprintf(text, "Player2: %d", world.players[1].points); 
+		DrawText(text, 210, 30, 12, VIOLET);
 		/*
 		DrawText("Position", 150, 30, 12, GREEN);
 		DrawText(text, 150, 45, 12, GREEN);

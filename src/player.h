@@ -15,6 +15,7 @@ struct
 	float speed;
 	Color color;
 	int camera_mode;
+	int points;
 }
 Player;
 
