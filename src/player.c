@@ -20,7 +20,7 @@ lookThroughPlayer(Camera camera, Player player, Player player2)
 	camera.target.x = player.position.x;
 	camera.target.y = player.position.y;
 	camera.target.z = player.position.z;
-	//camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
+	camera.up = (Vector3){ 0.0f, 0.0f, 1.0f };
 	//camera.target = player2.position;
 	//camera.target = (Vector3){
 	//	0, 0, 0

@@ -19,15 +19,15 @@ renderWorld(World* world, Camera camera)
 	drawPlayer(&world->players[0]);
 	drawPlayer(&world->players[1]);
 
-	for(int i = 0; i < 11; ++i){
-		//DrawCube((Vector3){i,3,3}, 0.5f, 0.5f, 0.5f, YELLOW);
-		//DrawCube((Vector3){i,4,3}, 0.5f, 0.5f, 0.5f, DARKPURPLE);
-		//DrawCube((Vector3){i,5,3}, 0.5f, 0.5f, 0.5f, YELLOW);
-		//DrawCube((Vector3){i,3,4}, 0.5f, 0.5f, 0.5f, MAGENTA);
-		//DrawCube((Vector3){i,4,4}, 0.5f, 0.5f, 0.5f, GREEN);
+	for(int i = 0; i <= 3; ++i){
+		DrawCube((Vector3){i,3,3}, 0.5f, 0.5f, 0.5f, YELLOW);
+		DrawCube((Vector3){i,4,3}, 0.5f, 0.5f, 0.5f, DARKPURPLE);
+		DrawCube((Vector3){i,5,3}, 0.5f, 0.5f, 0.5f, YELLOW);
+		DrawCube((Vector3){i,3,4}, 0.5f, 0.5f, 0.5f, MAGENTA);
+		DrawCube((Vector3){i,4,4}, 0.5f, 0.5f, 0.5f, GREEN);
 		DrawCube((Vector3){i,5,4}, 0.5f, 0.5f, 0.5f, MAGENTA);
-		DrawLineV((Vector2){i, 0}, (Vector2){i, 10}, BLACK);
-		DrawLineV((Vector2){0, i}, (Vector2){10, i}, BLACK);
+		//DrawLineV((Vector2){i, -3}, (Vector2){i, 3}, BLACK);
+		//DrawLineV((Vector2){-3, i}, (Vector2){3, i}, BLACK);
 	}
 	//rlPopMatrix();
 	EndMode3D();

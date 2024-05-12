@@ -140,6 +140,8 @@ int main(void)
 		EndScissorMode();
 		rlViewport(0, 0, 320, 240);
 
+		DrawRectangle((320/2)-4, 0, 2, 240, BLACK); // split screen line
+
 		// Draw cube with an applied texture
 		//test();
 		// Draw cube with an applied texture, but only a defined rectangle piece of the texture
@@ -151,6 +153,20 @@ int main(void)
 		char text[50];
 		sprintf(text, "Joystick %d,%d", inputs_p1.stick_x, inputs_p1.stick_y); 
 		DrawText(text, 10, 30, 12, GREEN);
+		DrawText("Position", 150, 30, 12, GREEN);
+		sprintf(text, "x: %f", camera.position.x); 
+		DrawText(text, 150, 45, 12, GREEN);
+		sprintf(text, "y: %f", camera.position.y); 
+		DrawText(text, 150, 60, 12, GREEN);
+		sprintf(text, "z: %f", camera.position.z); 
+		DrawText(text, 150, 75, 12, GREEN);
+		DrawText("Target", 220, 30, 12, GREEN);
+		sprintf(text, "%f", camera.target.x); 
+		DrawText(text, 220, 45, 12, GREEN);
+		sprintf(text, "%f", camera.target.y); 
+		DrawText(text, 220, 60, 12, GREEN);
+		sprintf(text, "%f", camera.target.z); 
+		DrawText(text, 220, 75, 12, GREEN);
 		DrawFPS(10, 10);
 
 		EndDrawing();
