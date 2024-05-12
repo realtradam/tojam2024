@@ -58,15 +58,15 @@ World world = {
 		{ 
 			.position = { 0 },
 			.direction = { 1, 0, 0 },
-			.speed = 1.0f/60.0f,
-			.color = BLUE,
+			.speed = 1.0f/30.0f,
+			.color = DARKBLUE,
 			.camera_mode = 1,
 		},
 		{
 			.position = { 2, 0, 0 },
 			.direction = { -1, 0, 0 },
-			.speed = 1.0f/60.0f,
-			.color = VIOLET,
+			.speed = 1.0f/30.0f,
+			.color = DARKPURPLE,
 			.camera_mode = 1,
 		}
 	}

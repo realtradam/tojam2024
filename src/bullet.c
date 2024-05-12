@@ -44,11 +44,11 @@ render_bullets(void)
 		}
 		else if(bullets[i].team == 1)
 		{
-			DrawCube(bullets[i].position, 0.25, 0.25, 0.25, DARKBLUE);
+			DrawCube(bullets[i].position, 0.25, 0.25, 0.25, BLUE);
 		}
 		else if(bullets[i].team == 2)
 		{
-			DrawCube(bullets[i].position, 0.25, 0.25, 0.25, DARKPURPLE);
+			DrawCube(bullets[i].position, 0.25, 0.25, 0.25, VIOLET);
 		}
 	}
 }
