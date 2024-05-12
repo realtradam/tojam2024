@@ -1,5 +1,6 @@
 #include "render.h"
 #include "rlgl.h"
+#include "bullet.h"
 
 void
 drawLine(Vector3 start, Vector3 end, float width, int up, Color color)
@@ -128,6 +129,8 @@ renderWorld(World* world, Camera camera)
 	//		);
 	drawPlayer(&world->players[0]);
 	drawPlayer(&world->players[1]);
+
+	render_bullets();
 
 	//drawGrid((Vector3){0}, 10, 1);
 

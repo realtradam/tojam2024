@@ -29,6 +29,7 @@ bool xflag=false;
 #include "input.h"
 #include "render.h"
 #include "world.h"
+#include "bullet.h"
 
 Camera camera = { 0 };
 Camera camera2 = { 0 };
@@ -59,12 +60,14 @@ World world = {
 			.direction = { 1, 0, 0 },
 			.speed = 1.0f/60.0f,
 			.color = BLUE,
+			.camera_mode = 1,
 		},
 		{
 			.position = { 2, 0, 0 },
 			.direction = { -1, 0, 0 },
 			.speed = 1.0f/60.0f,
-			.color = RED,
+			.color = MAGENTA,
+			.camera_mode = 1,
 		}
 	}
 };
@@ -115,8 +118,41 @@ int main(void)
 		// Update
 		//-----------------------------------------------------
 		//controller_read(&controllers);
+		updateController();
 
+		if(pressed_p1.r)
+		{
+			if(world.players[0].camera_mode == 0)
+			{
+				world.players[0].camera_mode = 1;
+			}
+			else
+			{
+				world.players[0].camera_mode = 0;
+			}
+		}
+
+		if(pressed_p2.r)
+		{
+			if(world.players[1].camera_mode == 0)
+			{
+				world.players[1].camera_mode = 1;
+			}
+			else
+			{
+				world.players[1].camera_mode = 0;
+			}
+		}
+
+		if(pressed_p1.z)
+		{
+			spawn_bullet(1, world.players[0].position, world.players[0].direction);
+		}
+		bullet_collision_check();
+
+		movePlayers();
 		camera = lookThroughPlayer(camera, world.players[0]);
+		camera2 = lookThroughPlayer(camera2, world.players[1]);
 
 		// Update
 		//----------------------------------------------------------------------------------
@@ -147,8 +183,6 @@ int main(void)
 		//DrawCubeTextureRec(texture, (Rectangle){ 0, texture.height/2, texture.width/2, texture.height/2 }, 
 		//    (Vector3){ 2.0f, 1.0f, 0.0f }, 2.0f, 2.0f, 2.0f, WHITE);
 		
-		movePlayers();
-		updateController();
 
 		char text[50];
 		sprintf(text, "Joystick %d,%d", inputs_p1.stick_x, inputs_p1.stick_y); 

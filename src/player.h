@@ -4,6 +4,9 @@
 #include "raylib.h"
 #include "input.h"
 
+// for camera_style
+// 0 = first person
+// 1 = third person
 typedef
 struct
 {
@@ -11,6 +14,7 @@ struct
 	Vector3 direction;
 	float speed;
 	Color color;
+	int camera_mode;
 }
 Player;
 
