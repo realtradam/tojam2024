@@ -76,15 +76,18 @@ bullet_collision_check(void)
 		if (bullets[i].team == 1)
 		{
 			enemypos = world.players[1].position;
+			if (Vector3Distance(bullets[i].position, enemypos) < 1)
+			{
+				world.players[0].points++;
+				bullets[i].team = 0;
+			}
 		}
 		else if (bullets[i].team == 2)
 		{
 			enemypos = world.players[0].position;
-		}
-		if (bullets[i].team != 0) {
-			if (Vector3Distance(bullets[i].position, enemypos))
+			if (Vector3Distance(bullets[i].position, enemypos) < 1)
 			{
-				world.players[bullets[i].team-1].points++;
+				world.players[1].points++;
 				bullets[i].team = 0;
 			}
 		}
