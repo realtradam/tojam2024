@@ -1,4 +1,6 @@
 #include "bullet.h"
+#include "world.h"
+#include "raymath.h"
 
 typedef
 struct
@@ -53,7 +55,7 @@ render_bullets(void)
 	}
 }
 
-	void
+void
 bullet_collision_check(void)
 {
 	for(int i = 0; i < 100; ++i)
@@ -70,6 +72,12 @@ bullet_collision_check(void)
 		bullets[i].position.x += bullets[i].direction.x * 0.25;
 		bullets[i].position.y += bullets[i].direction.y * 0.25;
 		bullets[i].position.z += bullets[i].direction.z * 0.25;
+		Vector3 enemypos = world.players[bullets[i].team-1].position;
+		if (Vector3Distance(world.players[0].position, enemypos))
+		{
+			world.players[bullets[i].team-1].points++;
+			bullets[i].team = 0;
+		}
 	}
 
 }
