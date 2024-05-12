@@ -66,7 +66,7 @@ World world = {
 			.position = { 2, 0, 0 },
 			.direction = { -1, 0, 0 },
 			.speed = 1.0f/60.0f,
-			.color = MAGENTA,
+			.color = VIOLET,
 			.camera_mode = 1,
 		}
 	}
@@ -147,6 +147,10 @@ int main(void)
 		if(pressed_p1.z)
 		{
 			spawn_bullet(1, world.players[0].position, world.players[0].direction);
+		}
+		if(pressed_p2.z)
+		{
+			spawn_bullet(2, world.players[1].position, world.players[1].direction);
 		}
 		bullet_collision_check();
 
