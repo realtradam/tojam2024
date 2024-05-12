@@ -6,7 +6,7 @@
 #include "world.h"
 
 void
-renderWorld(World* world, Camera* camera);
+renderWorld(World* world, Camera camera);
 
 #endif
 

@@ -61,8 +61,8 @@ World world = {
 			.color = BLUE,
 		},
 		{
-			.position = { 1, 1, 1 },
-			.direction = { 1, 0, 0 },
+			.position = { 2, 0, 0 },
+			.direction = { -1, 0, 0 },
 			.speed = 1.0f/60.0f,
 			.color = RED,
 		}
@@ -117,7 +117,7 @@ int main(void)
 		//controller_read(&controllers);
 
 		movePlayers();
-		//camera = lookThroughPlayer(camera, world.players[0], world.players[1]);
+		camera = lookThroughPlayer(camera, world.players[0], world.players[1]);
 
 		// Update
 		//----------------------------------------------------------------------------------
@@ -130,13 +130,13 @@ int main(void)
 
 		ClearBackground(DARKGRAY);
 
-		BeginScissorMode(320/2, 0, 320/2, 240);
-		rlViewport(320/2, 0, 320/2, 240);
-		renderWorld(&world, &camera);
-		EndScissorMode();
 		BeginScissorMode(0, 0, 320/2, 240);
 		rlViewport(0, 0, 320/2, 240);
-		renderWorld(&world, &camera2);
+		renderWorld(&world, camera);
+		EndScissorMode();
+		BeginScissorMode(320/2, 0, 320/2, 240);
+		rlViewport(320/2, 0, 320/2, 240);
+		renderWorld(&world, camera2);
 		EndScissorMode();
 		rlViewport(0, 0, 320, 240);
 
@@ -148,7 +148,7 @@ int main(void)
 		
 		updateController();
 
-		char text[500];
+		char text[50];
 		sprintf(text, "Joystick %d,%d", inputs_p1.stick_x, inputs_p1.stick_y); 
 		DrawText(text, 10, 30, 12, GREEN);
 		DrawFPS(10, 10);

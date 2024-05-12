@@ -13,16 +13,19 @@ drawPlayer(Player *player)
 Camera
 lookThroughPlayer(Camera camera, Player player, Player player2)
 {
-	camera.position = player.position;
-	//camera.target.x = player.position.x + player.direction.x;
-	//camera.target.y = player.position.y + player.direction.y;
-	//camera.target.z = player.position.z + player.direction.z;
+	//camera.position = player.position;
+	camera.position.x = player.position.x - (player.direction.x * 2);
+	camera.position.y = player.position.y - (player.direction.y * 2);
+	camera.position.z = player.position.z - (player.direction.z * 2);
+	camera.target.x = player.position.x;
+	camera.target.y = player.position.y;
+	camera.target.z = player.position.z;
 	//camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
 	//camera.target = player2.position;
 	//camera.target = (Vector3){
 	//	0, 0, 0
 	//};
-	camera.fovy = 45.0f;
+	camera.fovy = 90.0f;
 	camera.projection = CAMERA_PERSPECTIVE;
 	return camera;
 }
@@ -41,10 +44,10 @@ movePlayers(void)
 	if(distance != 0)
 	{
 		world.players[0].direction.x = x / distance;
-		world.players[0].direction.y = -y / distance;
+		world.players[0].direction.y = y / distance;
 	}
 
-	world.players[1].direction.x = inputs_p2.stick_x / 126.0f;
+	world.players[1].direction.y = inputs_p2.stick_x / 126.0f;
 	world.players[1].direction.z = -inputs_p2.stick_y / 126.0f;
 
 	world.players[0].position.x += world.players[0].direction.x * world.players[0].speed;

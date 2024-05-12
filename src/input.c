@@ -18,7 +18,6 @@ void updateController()
     held_p2 = joypad_get_buttons_held(JOYPAD_PORT_2);
     inputs_p2 = joypad_get_inputs(JOYPAD_PORT_2);
 
-
 	float x = inputs_p1.stick_x;
 	float y = inputs_p1.stick_y;
 
@@ -138,4 +137,5 @@ void updateController()
 
 	inputs_p2.stick_x = x / 55.0f * 127.0f;
 	inputs_p2.stick_y = y / 55.0f * 127.0f;
+
 }
