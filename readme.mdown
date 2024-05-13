@@ -19,7 +19,7 @@ Q -> change camera(thirdperson or firstperson)
 
 P2:
 Arrow Keys -> movement
-L -> shoot
-K -> change camera(thirdperson or firstperson)
+K -> shoot
+L -> change camera(thirdperson or firstperson)
 
 ## Playable Link: https://tradam.itch.io/spacecube64
