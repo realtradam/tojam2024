@@ -1,0 +1,25 @@
+# SpaceCube64
+
+An N64 space-like shooter game made in a weekend for TOJam 2024. Later ported to be playable on the web as well.
+
+### N64 Controls:
+
+Joystick -> movement
+Z -> shoot
+R -> change camera(thirdperson or firstperson)
+
+
+### Web Controls:
+
+P1:
+WASD -> movement
+V -> shoot
+Q -> change camera(thirdperson or firstperson)
+
+
+P2:
+Arrow Keys -> movement
+L -> shoot
+K -> change camera(thirdperson or firstperson)
+
+## Playable Link: https://tradam.itch.io/spacecube64
