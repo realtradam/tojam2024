@@ -21,10 +21,10 @@ void updateController()
 	static int previous_x_p2 = 0;
 	static int previous_y_p2 = 0;
 
-	pressed_p1.z = IsKeyPressed(KEY_V);
+	pressed_p1.z = IsKeyPressed(KEY_E);
 	pressed_p1.r = IsKeyPressed(KEY_Q);
-	pressed_p2.z = IsKeyPressed(KEY_K);
-	pressed_p2.r = IsKeyPressed(KEY_L);
+	pressed_p2.z = IsKeyPressed(KEY_O);
+	pressed_p2.r = IsKeyPressed(KEY_U);
 
 	static int turn_speed = 5;
 
@@ -70,7 +70,7 @@ void updateController()
 		previous_x_p1 *= 2.0f/3.0f;
 	}
 
-	if(IsKeyDown(KEY_UP))
+	if(IsKeyDown(KEY_I))
 	{
 		previous_y_p2 += turn_speed;
 		if(previous_y_p2 > 100)
@@ -78,7 +78,7 @@ void updateController()
 			previous_y_p2 = 100;
 		}
 	}
-	if(IsKeyDown(KEY_LEFT))
+	if(IsKeyDown(KEY_J))
 	{
 		previous_x_p2 -= turn_speed;
 		if(previous_x_p2 < -100)
@@ -86,7 +86,7 @@ void updateController()
 			previous_x_p2 = -100;
 		}
 	}
-	if(IsKeyDown(KEY_DOWN))
+	if(IsKeyDown(KEY_K))
 	{
 		previous_y_p2 -= turn_speed;
 		if(previous_y_p2 < -100)
@@ -94,7 +94,7 @@ void updateController()
 			previous_y_p2 = -100;
 		}
 	}
-	if(IsKeyDown(KEY_RIGHT))
+	if(IsKeyDown(KEY_L))
 	{
 		previous_x_p2 += turn_speed;
 		if(previous_x_p2 > 100)
@@ -103,11 +103,11 @@ void updateController()
 		}
 	}
 
-	if(!IsKeyDown(KEY_UP) && !IsKeyDown(KEY_DOWN))
+	if(!IsKeyDown(KEY_I) && !IsKeyDown(KEY_K))
 	{
 		previous_y_p2 *= 2.0f/3.0f;
 	}
-	if(!IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT))
+	if(!IsKeyDown(KEY_J) && !IsKeyDown(KEY_L))
 	{
 		previous_x_p2 *= 2.0f/3.0f;
 	}

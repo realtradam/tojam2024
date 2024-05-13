@@ -8,18 +8,16 @@ Joystick -> movement
 Z -> shoot
 R -> change camera(thirdperson or firstperson)
 
-
 ### Web Controls:
 
 P1:
 WASD -> movement
-V -> shoot
+E -> shoot
 Q -> change camera(thirdperson or firstperson)
 
-
 P2:
-Arrow Keys -> movement
-K -> shoot
-L -> change camera(thirdperson or firstperson)
+IJKL -> movement
+O -> shoot
+U -> change camera(thirdperson or firstperson)
 
 ## Playable Link: https://tradam.itch.io/spacecube64
