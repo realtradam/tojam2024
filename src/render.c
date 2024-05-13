@@ -2,6 +2,8 @@
 #include "rlgl.h"
 #include "bullet.h"
 
+void customBeginMode3D(Camera camera);
+
 void
 drawLine(Vector3 start, Vector3 end, float width, int up, Color color)
 {
@@ -115,36 +117,11 @@ drawGrid(Vector3 position, int lines, int size, Color color)
 void
 renderWorld(World* world, Camera camera)
 {
-	//Vector3 lookat = camera.target;
-	//camera.target = (Vector3){0};
-	//camera.position.x -= lookat.x;
-	//camera.position.y -= lookat.y;
-	//camera.position.z -= lookat.z;
 	customBeginMode3D(camera);
-	//rlPushMatrix();
-	//rlTranslatef(
-	//		-lookat.x,
-	//		-lookat.y,
-	//		-lookat.z
-	//		);
 	drawPlayer(&world->players[0]);
 	drawPlayer(&world->players[1]);
 
 	render_bullets();
-
-	//drawGrid((Vector3){0}, 10, 1);
-
-	for(int i = -3; i <= 3; ++i){
-		//DrawCube((Vector3){i,3,3}, 0.5f, 0.5f, 0.5f, YELLOW);
-		//DrawCube((Vector3){i,4,3}, 0.5f, 0.5f, 0.5f, DARKPURPLE);
-		//DrawCube((Vector3){i,5,3}, 0.5f, 0.5f, 0.5f, YELLOW);
-		//DrawCube((Vector3){i,3,4}, 0.5f, 0.5f, 0.5f, MAGENTA);
-		//DrawCube((Vector3){i,4,4}, 0.5f, 0.5f, 0.5f, GREEN);
-		//DrawCube((Vector3){i,5,4}, 0.5f, 0.5f, 0.5f, MAGENTA);
-		//DrawLineEx((Vector2){i, 3},(Vector2){i, -3},  5, BLACK);
-		//DrawLineEx((Vector2){3, i},(Vector2){-3, i},  5, BLACK);
-	}
-	//drawLine((Vector3){0}, (Vector3){10,0,0}, 2.0f, 2, BLACK);
 
 	int space = 3;
 
@@ -171,8 +148,5 @@ renderWorld(World* world, Camera camera)
 	drawGrid((Vector3){0}, 5, 1, ORANGE);
 	rlPopMatrix();
 
-
-
-	//rlPopMatrix();
 	EndMode3D();
 }

@@ -1,15 +1,123 @@
 #include "input.h"
+#ifdef PLATFORM_WEB
+#include "raylib.h"
+#include <stdio.h>
+#else
+#endif
 
-joypad_buttons_t pressed_p1;
-joypad_buttons_t held_p1;
-joypad_inputs_t inputs_p1;
+joypad_buttons_t pressed_p1 = {0};
+joypad_buttons_t held_p1 = {0};
+joypad_inputs_t inputs_p1 = {0};
 
-joypad_buttons_t pressed_p2;
-joypad_buttons_t held_p2;
-joypad_inputs_t inputs_p2;
+joypad_buttons_t pressed_p2 = {0};
+joypad_buttons_t held_p2 = {0};
+joypad_inputs_t inputs_p2 = {0};
 
 void updateController()
 {
+#ifdef PLATFORM_WEB
+	static int previous_x_p1 = 0;
+	static int previous_y_p1 = 0;
+	static int previous_x_p2 = 0;
+	static int previous_y_p2 = 0;
+
+	pressed_p1.z = IsKeyPressed(KEY_V);
+	pressed_p1.r = IsKeyPressed(KEY_Q);
+	pressed_p2.z = IsKeyPressed(KEY_K);
+	pressed_p2.r = IsKeyPressed(KEY_L);
+
+	static int turn_speed = 5;
+
+	if(IsKeyDown(KEY_W))
+	{
+		previous_y_p1 += turn_speed;
+		if(previous_y_p1 > 100)
+		{
+			previous_y_p1 = 100;
+		}
+	}
+	if(IsKeyDown(KEY_A))
+	{
+		previous_x_p1 -= turn_speed;
+		if(previous_x_p1 < -100)
+		{
+			previous_x_p1 = -100;
+		}
+	}
+	if(IsKeyDown(KEY_S))
+	{
+		previous_y_p1 -= turn_speed;
+		if(previous_y_p1 < -100)
+		{
+			previous_y_p1 = -100;
+		}
+	}
+	if(IsKeyDown(KEY_D))
+	{
+		previous_x_p1 += turn_speed;
+		if(previous_x_p1 > 100)
+		{
+			previous_x_p1 = 100;
+		}
+	}
+
+	if(!IsKeyDown(KEY_W) && !IsKeyDown(KEY_S))
+	{
+		previous_y_p1 *= 2.0f/3.0f;
+	}
+	if(!IsKeyDown(KEY_A) && !IsKeyDown(KEY_D))
+	{
+		previous_x_p1 *= 2.0f/3.0f;
+	}
+
+	if(IsKeyDown(KEY_UP))
+	{
+		previous_y_p2 += turn_speed;
+		if(previous_y_p2 > 100)
+		{
+			previous_y_p2 = 100;
+		}
+	}
+	if(IsKeyDown(KEY_LEFT))
+	{
+		previous_x_p2 -= turn_speed;
+		if(previous_x_p2 < -100)
+		{
+			previous_x_p2 = -100;
+		}
+	}
+	if(IsKeyDown(KEY_DOWN))
+	{
+		previous_y_p2 -= turn_speed;
+		if(previous_y_p2 < -100)
+		{
+			previous_y_p2 = -100;
+		}
+	}
+	if(IsKeyDown(KEY_RIGHT))
+	{
+		previous_x_p2 += turn_speed;
+		if(previous_x_p2 > 100)
+		{
+			previous_x_p2 = 100;
+		}
+	}
+
+	if(!IsKeyDown(KEY_UP) && !IsKeyDown(KEY_DOWN))
+	{
+		previous_y_p2 *= 2.0f/3.0f;
+	}
+	if(!IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT))
+	{
+		previous_x_p2 *= 2.0f/3.0f;
+	}
+
+	inputs_p1.stick_y = previous_y_p1;
+	inputs_p1.stick_x = previous_x_p1;
+
+	inputs_p2.stick_y = previous_y_p2;
+	inputs_p2.stick_x = previous_x_p2;
+#else
     joypad_poll();
     pressed_p1 = joypad_get_buttons_pressed(JOYPAD_PORT_1);
     held_p1 = joypad_get_buttons_held(JOYPAD_PORT_1);
@@ -17,9 +125,11 @@ void updateController()
     pressed_p2 = joypad_get_buttons_pressed(JOYPAD_PORT_2);
     held_p2 = joypad_get_buttons_held(JOYPAD_PORT_2);
     inputs_p2 = joypad_get_inputs(JOYPAD_PORT_2);
+#endif
 
 	float x = inputs_p1.stick_x;
 	float y = inputs_p1.stick_y;
+
 
 	if(x > 60)
 	{
@@ -65,28 +175,11 @@ void updateController()
 		y += 5;
 	}
 
-	//float distance = sqrtf((x * x) + (y * y));
-
-	//char text[500];
-	//char text2[500];
-	//char text3[500];
-	//sprintf(text, "x %f", x); 
-	//sprintf(text2, "y %f", y); 
-	//sprintf(text3, "d %f", distance); 
-	//DrawText(text, 100, 10, 12, GREEN);
-	//DrawText(text2, 100, 30, 12, GREEN);
-	//DrawText(text3, 100, 60, 12, GREEN);
-
-	/*
-	if(distance != 0)
-	{
-		inputs_p1.stick_x = (x / distance) * 127.0f;
-		inputs_p1.stick_y = (y / distance) * 127.0f;
-	}
-	*/
-
 	inputs_p1.stick_x = x / 55.0f * 127.0f;
 	inputs_p1.stick_y = y / 55.0f * 127.0f;
+
+	printf("Input %f\n", x);
+	printf("Input %d\n", inputs_p1.stick_x);
 
 	x = inputs_p2.stick_x;
 	y = inputs_p2.stick_y;
@@ -137,5 +230,4 @@ void updateController()
 
 	inputs_p2.stick_x = x / 55.0f * 127.0f;
 	inputs_p2.stick_y = y / 55.0f * 127.0f;
-
 }

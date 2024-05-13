@@ -1,0 +1,38 @@
+// place this code into raylib/src/rcore.c
+void customBeginMode3D(Camera camera)
+{
+    rlDrawRenderBatchActive();      // Update and draw internal render batch
+
+    rlMatrixMode(RL_PROJECTION);    // Switch to projection matrix
+    rlPushMatrix();                 // Save previous matrix, which contains the settings for the 2d ortho projection
+    rlLoadIdentity();               // Reset current matrix (projection)
+
+    float aspect = ((float)CORE.Window.currentFbo.width / 2.0f)/(float)CORE.Window.currentFbo.height;
+
+    // NOTE: zNear and zFar values are important when computing depth buffer values
+    if (camera.projection == CAMERA_PERSPECTIVE)
+    {
+        // Setup perspective projection
+        double top = RL_CULL_DISTANCE_NEAR*tan(camera.fovy*0.5*DEG2RAD);
+        double right = top*aspect;
+
+        rlFrustum(-right, right, -top, top, RL_CULL_DISTANCE_NEAR, RL_CULL_DISTANCE_FAR);
+    }
+    else if (camera.projection == CAMERA_ORTHOGRAPHIC)
+    {
+        // Setup orthographic projection
+        double top = camera.fovy/2.0;
+        double right = top*aspect;
+
+        rlOrtho(-right, right, -top,top, RL_CULL_DISTANCE_NEAR, RL_CULL_DISTANCE_FAR);
+    }
+
+    rlMatrixMode(RL_MODELVIEW);     // Switch back to modelview matrix
+    rlLoadIdentity();               // Reset current matrix (modelview)
+
+    // Setup Camera view
+    Matrix matView = MatrixLookAt(camera.position, camera.target, camera.up);
+    rlMultMatrixf(MatrixToFloat(matView));      // Multiply modelview matrix by view matrix (camera)
+
+    rlEnableDepthTest();            // Enable DEPTH_TEST for 3D
+}

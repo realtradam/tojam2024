@@ -1,13 +1,19 @@
 BUILD_DIR=build
 SRC_DIRS := ./src
-include $(N64_INST)/include/n64.mk
+ifeq ($(MAKECMDGOALS),n64)
+	include $(N64_INST)/include/n64.mk
+else
+	CC = emcc
+endif
 
+#include $(N64_INST)/include/n64.mk
 //src = src/main.c
 src := $(shell find $(SRC_DIRS) -name '*.cpp' -or -name '*.c' -or -name '*.s')
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 INC_DIRS := $(shell find $(SRC_DIRS) -type d)
 N64_INCLUDEDIR := $(addprefix -I,$(INC_DIRS))
+WEB_INCLUDEDIR := raylib/src
 assets_png = $(wildcard assets/*.png)
 #assets_m3d = $(wildcard assets/*.m3d)
 
@@ -16,8 +22,26 @@ assets_conv = $(addprefix filesystem/,$(notdir $(assets_png:%.png=%.sprite)))
 
 MKSPRITE_FLAGS ?=
 
-LDFLAGS += -lraylib
-all: raylib.z64
+ifeq ($(MAKECMDGOALS),n64)
+	LDFLAGS += -lraylib
+endif
+
+
+ifeq ($(MAKECMDGOALS),n64)
+
+else
+# The final build step.
+$(BUILD_DIR)/index.html: $(OBJS)
+	mkdir -p $(dir $@)
+	$(CC) $(src) -o $@ $(LDFLAGS) -Os -Wall raylib/src/libraylib.a -I. -Iraylib/src -L. -Lraylib/src -s USE_GLFW=3 -DPLATFORM_WEB -sASYNCIFY --shell-file raylib/src/minshell.html
+
+# Build step for C source
+$(BUILD_DIR)/%.c.o: %.c
+	mkdir -p $(dir $@)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+endif
+
+n64: raylib.z64
 
 filesystem/%.sprite: assets/%.png
 	@mkdir -p $(dir $@)
@@ -42,4 +66,4 @@ clean:
 
 -include $(wildcard $(BUILD_DIR)/*.d)
 
-.PHONY: all clean
+.PHONY: n64 clean

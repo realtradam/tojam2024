@@ -1,13 +1,20 @@
 #include "player.h"
 #include "world.h"
+#ifdef PLATFORM_WEB
+
+#include <math.h>
+
+#else
+
 #include <fmath.h>
+
+#endif
+
 #include "raymath.h"
 
 	void
 drawPlayer(Player *player)
 {
-	//DrawCube(player->position, 1.0f, 1.0f, 1.0f, BLUE);
-	//DrawSphereEx(player->position, 0.5f, 3, 3, player->color);
 	DrawCube(player->position, 0.5f, 0.5f, 0.5f, player->color);
 }
 
@@ -31,7 +38,6 @@ lookThroughPlayer(Camera camera, Player player)
 	}
 	else if(player.camera_mode == 1)
 	{
-		//camera.position = player.position;
 		camera.position.x = player.position.x - (player.direction.x * 2);
 		camera.position.y = player.position.y - (player.direction.y * 2);
 		camera.position.z = player.position.z - (player.direction.z * 2) + player.camera_mode;
@@ -40,10 +46,6 @@ lookThroughPlayer(Camera camera, Player player)
 		camera.target.z = player.position.z;
 	}
 	camera.up = (Vector3){ 0.0f, 0.0f, 1.0f };
-	//camera.target = player2.position;
-	//camera.target = (Vector3){
-	//	0, 0, 0
-	//};
 	camera.fovy = 90.0f;
 	camera.projection = CAMERA_PERSPECTIVE;
 	return camera;
