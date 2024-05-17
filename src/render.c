@@ -114,6 +114,82 @@ drawGrid(Vector3 position, int lines, int size, Color color)
 	rlPopMatrix();
 }
 
+GLuint customLoadTextureN64(char *spritePath)
+{
+	sprite_t *sprite = sprite_load(spritePath);
+	GLuint id;
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
+	glSpriteTextureN64(GL_TEXTURE_2D, sprite, NULL);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	return id;
+}
+
+/*Vector3 vertices[] = {
+	{0.5f,  0.5f, 0.0f},
+	{0.5f, -0.5f, 0.0f},
+	{-0.5f, -0.5f, 0.0f},
+	{-0.5f,  0.5f, 0.0f},
+};
+
+float texcoords[] = {
+	1.0f, 1.0f,
+	1.0f, 0.0f,
+	0.0f, 0.0f,
+	0.0f, 1.0f
+};*/
+
+Vector2 vertices[] =
+{
+	{1.0f, 0.0f},
+	{1.0f, 1.0f},
+	{0.0f, 1.0f},
+	{0.0f, 0.0f},
+};
+
+float texcoords[] = {
+	1.0f, 1.0f,
+	1.0f, 0.0f,
+	0.0f, 0.0f,
+	0.0f, 1.0f,
+};
+
+uint8_t indices[] =
+{
+	0, 1, 2, 3,
+};
+
+void
+renderSkybox(GLuint *textures, int m, int n, Camera3D camera)
+{
+	//int len = m*n;
+	rlPushMatrix();
+	rlTranslatef(-6.0f, 3.0f, 0.0f);
+	glEnable(GL_TEXTURE_2D);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	rlColor4ub(255,255,255,255);
+	glVertexPointer(2, GL_FLOAT, 0, vertices);
+	glTexCoordPointer(2, GL_FLOAT, 0, texcoords);
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			glBindTexture(GL_TEXTURE_2D, textures[i*n+j]);
+			rlPushMatrix();
+			rlTranslatef(j, -i, 0.0f);
+			glDrawElements(GL_QUADS, 4, GL_UNSIGNED_BYTE, indices);
+			rlPopMatrix();
+		}
+	}
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	rlPopMatrix();
+}
+
 void
 renderWorld(World* world, Camera camera)
 {

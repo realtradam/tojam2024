@@ -65,6 +65,15 @@ World world = {
 	}
 };
 
+char *sprite_paths[] =
+{
+	"rom:/1_32px.sprite",
+	"rom:/2_32px.sprite",
+	"rom:/3_32px.sprite",
+	"rom:/4_32px.sprite",
+	"rom:/5_32px.sprite",
+	"rom:/6_32px.sprite",
+};
 
 int main(void)
 {
@@ -86,7 +95,27 @@ int main(void)
 	camera2.fovy = 35.0f;
 	camera2.projection = CAMERA_PERSPECTIVE;
 
+	Camera camerax = { 0 };
+	camerax.position = (Vector3){ 0.0f, 0.0f, 15.0f };
+	camerax.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+	camerax.up = (Vector3){ 0.0f, 1.0f, 0.0f };
+	camerax.fovy = 45.0f;
+	camerax.projection = CAMERA_PERSPECTIVE;
+
+	sprite_t *sprites[6];
+	GLuint textures[6];
+	glGenTextures(6, textures);
+	for (int i = 0; i < 6; i++)
+	{
+		textures[i] = customLoadTextureN64(sprite_paths[i]);
+	}
+
 	SetTargetFPS(60);
+
+	GLuint dl_skybox = glGenLists(1);
+	glNewList(dl_skybox, GL_COMPILE);
+	renderSkybox(textures, 2, 3, camera);
+	glEndList();
 
 	while (!WindowShouldClose())
 	{
@@ -138,6 +167,9 @@ int main(void)
 		BeginDrawing();
 
 		ClearBackground(BLACK);
+		BeginMode3D(camerax);
+		glCallList(dl_skybox);
+		EndMode3D();
 		BeginScissorMode(0, 0, 320/2, 240);
 		rlViewport(0, 0, 320/2, 240);
 		renderWorld(&world, camera);

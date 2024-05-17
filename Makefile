@@ -46,8 +46,9 @@ n64: raylib.z64
 filesystem/%.sprite: assets/%.png
 	@mkdir -p $(dir $@)
 	@echo "    [SPRITE] $@"
-	echo @$(N64_MKSPRITE) -v -f RGBA16 --compress -o "$(dir $@)" "$<"
-	@cp "$<" "$(dir $@)"
+	@$(N64_MKSPRITE) -v -f RGBA16 --compress -o "$(dir $@)" "$<"
+	#echo @$(N64_MKSPRITE) -v -f RGBA16 --compress -o "$(dir $@)" "$<"
+	#@cp "$<" "$(dir $@)"
 
 #filesystem/%.m3d: assets/%.m3d
 #	@mkdir -p $(dir $@)
